@@ -6,6 +6,7 @@ package main
 
 import (
 	"fmt"
+
 	rbt "github.com/emirpasic/gods/trees/redblacktree"
 )
 

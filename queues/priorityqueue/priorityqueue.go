@@ -17,10 +17,11 @@ package priorityqueue
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/emirpasic/gods/queues"
 	"github.com/emirpasic/gods/trees/binaryheap"
 	"github.com/emirpasic/gods/utils"
-	"strings"
 )
 
 // Assert Queue implementation

@@ -6,6 +6,7 @@ package hashset
 
 import (
 	"encoding/json"
+
 	"github.com/emirpasic/gods/containers"
 )
 

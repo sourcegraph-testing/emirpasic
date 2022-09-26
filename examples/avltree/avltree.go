@@ -6,6 +6,7 @@ package main
 
 import (
 	"fmt"
+
 	avl "github.com/emirpasic/gods/trees/avltree"
 )
 

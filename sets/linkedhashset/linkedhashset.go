@@ -15,9 +15,10 @@ package linkedhashset
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/emirpasic/gods/lists/doublylinkedlist"
 	"github.com/emirpasic/gods/sets"
-	"strings"
 )
 
 // Assert Set implementation
