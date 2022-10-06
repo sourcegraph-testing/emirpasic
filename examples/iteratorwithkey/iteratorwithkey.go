@@ -53,7 +53,7 @@ func main() {
 	}
 
 	// Seek key-value pair whose value starts with "b"
-	seek := func(key interface{}, value interface{}) bool {
+	seek := func(key any, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 

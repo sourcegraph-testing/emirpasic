@@ -16,14 +16,14 @@ import (
 
 // List interface that all lists implement
 type List interface {
-	Get(index int) (interface{}, bool)
+	Get(index int) (any, bool)
 	Remove(index int)
-	Add(values ...interface{})
-	Contains(values ...interface{}) bool
+	Add(values ...any)
+	Contains(values ...any) bool
 	Sort(comparator utils.Comparator)
 	Swap(index1, index2 int)
-	Insert(index int, values ...interface{})
-	Set(index int, value interface{})
+	Insert(index int, values ...any)
+	Set(index int, value any)
 
 	containers.Container
 	// Empty() bool

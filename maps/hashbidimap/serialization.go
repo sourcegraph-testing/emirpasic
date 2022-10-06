@@ -20,7 +20,7 @@ func (m *Map) ToJSON() ([]byte, error) {
 
 // FromJSON populates the map from the input JSON representation.
 func (m *Map) FromJSON(data []byte) error {
-	elements := make(map[string]interface{})
+	elements := make(map[string]any)
 	err := json.Unmarshal(data, &elements)
 	if err == nil {
 		m.Clear()

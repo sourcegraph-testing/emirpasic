@@ -13,9 +13,9 @@ import "github.com/emirpasic/gods/containers"
 
 // Stack interface that all stacks implement
 type Stack interface {
-	Push(value interface{})
-	Pop() (value interface{}, ok bool)
-	Peek() (value interface{}, ok bool)
+	Push(value any)
+	Pop() (value any, ok bool)
+	Peek() (value any, ok bool)
 
 	containers.Container
 	// Empty() bool

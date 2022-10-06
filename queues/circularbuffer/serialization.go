@@ -20,7 +20,7 @@ func (queue *Queue) ToJSON() ([]byte, error) {
 
 // FromJSON populates list's elements from the input JSON representation.
 func (queue *Queue) FromJSON(data []byte) error {
-	var values []interface{}
+	var values []any
 	err := json.Unmarshal(data, &values)
 	if err == nil {
 		for _, value := range values {

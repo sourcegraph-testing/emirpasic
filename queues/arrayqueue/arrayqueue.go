@@ -31,13 +31,13 @@ func New() *Queue {
 }
 
 // Enqueue adds a value to the end of the queue
-func (queue *Queue) Enqueue(value interface{}) {
+func (queue *Queue) Enqueue(value any) {
 	queue.list.Add(value)
 }
 
 // Dequeue removes first element of the queue and returns it, or nil if queue is empty.
 // Second return parameter is true, unless the queue was empty and there was nothing to dequeue.
-func (queue *Queue) Dequeue() (value interface{}, ok bool) {
+func (queue *Queue) Dequeue() (value any, ok bool) {
 	value, ok = queue.list.Get(0)
 	if ok {
 		queue.list.Remove(0)
@@ -47,7 +47,7 @@ func (queue *Queue) Dequeue() (value interface{}, ok bool) {
 
 // Peek returns first element of the queue without removing it, or nil if queue is empty.
 // Second return parameter is true, unless the queue was empty and there was nothing to peek.
-func (queue *Queue) Peek() (value interface{}, ok bool) {
+func (queue *Queue) Peek() (value any, ok bool) {
 	return queue.list.Get(0)
 }
 
@@ -67,7 +67,7 @@ func (queue *Queue) Clear() {
 }
 
 // Values returns all elements in the queue (FIFO order).
-func (queue *Queue) Values() []interface{} {
+func (queue *Queue) Values() []any {
 	return queue.list.Values()
 }
 

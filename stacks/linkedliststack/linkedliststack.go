@@ -30,13 +30,13 @@ func New() *Stack {
 }
 
 // Push adds a value onto the top of the stack
-func (stack *Stack) Push(value interface{}) {
+func (stack *Stack) Push(value any) {
 	stack.list.Prepend(value)
 }
 
 // Pop removes top element on stack and returns it, or nil if stack is empty.
 // Second return parameter is true, unless the stack was empty and there was nothing to pop.
-func (stack *Stack) Pop() (value interface{}, ok bool) {
+func (stack *Stack) Pop() (value any, ok bool) {
 	value, ok = stack.list.Get(0)
 	stack.list.Remove(0)
 	return
@@ -44,7 +44,7 @@ func (stack *Stack) Pop() (value interface{}, ok bool) {
 
 // Peek returns top element on the stack without removing it, or nil if stack is empty.
 // Second return parameter is true, unless the stack was empty and there was nothing to peek.
-func (stack *Stack) Peek() (value interface{}, ok bool) {
+func (stack *Stack) Peek() (value any, ok bool) {
 	return stack.list.Get(0)
 }
 
@@ -64,7 +64,7 @@ func (stack *Stack) Clear() {
 }
 
 // Values returns all elements in the stack (LIFO order).
-func (stack *Stack) Values() []interface{} {
+func (stack *Stack) Values() []any {
 	return stack.list.Values()
 }
 

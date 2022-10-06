@@ -36,7 +36,7 @@ func New() *Map {
 }
 
 // Put inserts element into the map.
-func (m *Map) Put(key interface{}, value interface{}) {
+func (m *Map) Put(key any, value any) {
 	if valueByKey, ok := m.forwardMap.Get(key); ok {
 		m.inverseMap.Remove(valueByKey)
 	}
@@ -49,18 +49,18 @@ func (m *Map) Put(key interface{}, value interface{}) {
 
 // Get searches the element in the map by key and returns its value or nil if key is not found in map.
 // Second return parameter is true if key was found, otherwise false.
-func (m *Map) Get(key interface{}) (value interface{}, found bool) {
+func (m *Map) Get(key any) (value any, found bool) {
 	return m.forwardMap.Get(key)
 }
 
 // GetKey searches the element in the map by value and returns its key or nil if value is not found in map.
 // Second return parameter is true if value was found, otherwise false.
-func (m *Map) GetKey(value interface{}) (key interface{}, found bool) {
+func (m *Map) GetKey(value any) (key any, found bool) {
 	return m.inverseMap.Get(value)
 }
 
 // Remove removes the element from the map by key.
-func (m *Map) Remove(key interface{}) {
+func (m *Map) Remove(key any) {
 	if value, found := m.forwardMap.Get(key); found {
 		m.forwardMap.Remove(key)
 		m.inverseMap.Remove(value)
@@ -78,12 +78,12 @@ func (m *Map) Size() int {
 }
 
 // Keys returns all keys (random order).
-func (m *Map) Keys() []interface{} {
+func (m *Map) Keys() []any {
 	return m.forwardMap.Keys()
 }
 
 // Values returns all values (random order).
-func (m *Map) Values() []interface{} {
+func (m *Map) Values() []any {
 	return m.inverseMap.Keys()
 }
 

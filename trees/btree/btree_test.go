@@ -21,7 +21,7 @@ func TestBTreeGet1(t *testing.T) {
 	tree.Put(6, "f")
 	tree.Put(7, "g")
 
-	tests := [][]interface{}{
+	tests := [][]any{
 		{0, nil, false},
 		{1, "a", true},
 		{2, "b", true},
@@ -53,7 +53,7 @@ func TestBTreeGet2(t *testing.T) {
 	tree.Put(2, "b")
 	tree.Put(1, "a")
 
-	tests := [][]interface{}{
+	tests := [][]any{
 		{0, nil, false},
 		{1, "a", true},
 		{2, "b", true},
@@ -1005,7 +1005,7 @@ func TestBTreeSearch(t *testing.T) {
 	{
 		tree := NewWithIntComparator(3)
 		tree.Root = &Node{Entries: []*Entry{}, Children: make([]*Node, 0)}
-		tests := [][]interface{}{
+		tests := [][]any{
 			{0, 0, false},
 		}
 		for _, test := range tests {
@@ -1021,7 +1021,7 @@ func TestBTreeSearch(t *testing.T) {
 	{
 		tree := NewWithIntComparator(3)
 		tree.Root = &Node{Entries: []*Entry{{2, 0}, {4, 1}, {6, 2}}, Children: []*Node{}}
-		tests := [][]interface{}{
+		tests := [][]any{
 			{0, 0, false},
 			{1, 0, false},
 			{2, 0, true},
@@ -1068,7 +1068,7 @@ func assertValidTreeNode(t *testing.T, node *Node, expectedEntries int, expected
 
 func TestBTreeIteratorNextTo(t *testing.T) {
 	// Sample seek function, i.e. string starting with "b"
-	seek := func(index interface{}, value interface{}) bool {
+	seek := func(index any, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 
@@ -1120,7 +1120,7 @@ func TestBTreeIteratorNextTo(t *testing.T) {
 
 func TestBTreeIteratorPrevTo(t *testing.T) {
 	// Sample seek function, i.e. string starting with "b"
-	seek := func(index interface{}, value interface{}) bool {
+	seek := func(index any, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 
@@ -1202,7 +1202,7 @@ func TestBTreeSerialization(t *testing.T) {
 	err = tree.FromJSON(bytes)
 	assert()
 
-	bytes, err = json.Marshal([]interface{}{"a", "b", "c", tree})
+	bytes, err = json.Marshal([]any{"a", "b", "c", tree})
 	if err != nil {
 		t.Errorf("Got error %v", err)
 	}

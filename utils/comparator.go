@@ -10,13 +10,14 @@ import "time"
 // which will panic if a or b are not of the asserted type.
 //
 // Should return a number:
-//    negative , if a < b
-//    zero     , if a == b
-//    positive , if a > b
-type Comparator func(a, b interface{}) int
+//
+//	negative , if a < b
+//	zero     , if a == b
+//	positive , if a > b
+type Comparator func(a, b any) int
 
 // StringComparator provides a fast comparison on strings
-func StringComparator(a, b interface{}) int {
+func StringComparator(a, b any) int {
 	s1 := a.(string)
 	s2 := b.(string)
 	min := len(s2)
@@ -40,7 +41,7 @@ func StringComparator(a, b interface{}) int {
 }
 
 // IntComparator provides a basic comparison on int
-func IntComparator(a, b interface{}) int {
+func IntComparator(a, b any) int {
 	aAsserted := a.(int)
 	bAsserted := b.(int)
 	switch {
@@ -54,7 +55,7 @@ func IntComparator(a, b interface{}) int {
 }
 
 // Int8Comparator provides a basic comparison on int8
-func Int8Comparator(a, b interface{}) int {
+func Int8Comparator(a, b any) int {
 	aAsserted := a.(int8)
 	bAsserted := b.(int8)
 	switch {
@@ -68,7 +69,7 @@ func Int8Comparator(a, b interface{}) int {
 }
 
 // Int16Comparator provides a basic comparison on int16
-func Int16Comparator(a, b interface{}) int {
+func Int16Comparator(a, b any) int {
 	aAsserted := a.(int16)
 	bAsserted := b.(int16)
 	switch {
@@ -82,7 +83,7 @@ func Int16Comparator(a, b interface{}) int {
 }
 
 // Int32Comparator provides a basic comparison on int32
-func Int32Comparator(a, b interface{}) int {
+func Int32Comparator(a, b any) int {
 	aAsserted := a.(int32)
 	bAsserted := b.(int32)
 	switch {
@@ -96,7 +97,7 @@ func Int32Comparator(a, b interface{}) int {
 }
 
 // Int64Comparator provides a basic comparison on int64
-func Int64Comparator(a, b interface{}) int {
+func Int64Comparator(a, b any) int {
 	aAsserted := a.(int64)
 	bAsserted := b.(int64)
 	switch {
@@ -110,7 +111,7 @@ func Int64Comparator(a, b interface{}) int {
 }
 
 // UIntComparator provides a basic comparison on uint
-func UIntComparator(a, b interface{}) int {
+func UIntComparator(a, b any) int {
 	aAsserted := a.(uint)
 	bAsserted := b.(uint)
 	switch {
@@ -124,7 +125,7 @@ func UIntComparator(a, b interface{}) int {
 }
 
 // UInt8Comparator provides a basic comparison on uint8
-func UInt8Comparator(a, b interface{}) int {
+func UInt8Comparator(a, b any) int {
 	aAsserted := a.(uint8)
 	bAsserted := b.(uint8)
 	switch {
@@ -138,7 +139,7 @@ func UInt8Comparator(a, b interface{}) int {
 }
 
 // UInt16Comparator provides a basic comparison on uint16
-func UInt16Comparator(a, b interface{}) int {
+func UInt16Comparator(a, b any) int {
 	aAsserted := a.(uint16)
 	bAsserted := b.(uint16)
 	switch {
@@ -152,7 +153,7 @@ func UInt16Comparator(a, b interface{}) int {
 }
 
 // UInt32Comparator provides a basic comparison on uint32
-func UInt32Comparator(a, b interface{}) int {
+func UInt32Comparator(a, b any) int {
 	aAsserted := a.(uint32)
 	bAsserted := b.(uint32)
 	switch {
@@ -166,7 +167,7 @@ func UInt32Comparator(a, b interface{}) int {
 }
 
 // UInt64Comparator provides a basic comparison on uint64
-func UInt64Comparator(a, b interface{}) int {
+func UInt64Comparator(a, b any) int {
 	aAsserted := a.(uint64)
 	bAsserted := b.(uint64)
 	switch {
@@ -180,7 +181,7 @@ func UInt64Comparator(a, b interface{}) int {
 }
 
 // Float32Comparator provides a basic comparison on float32
-func Float32Comparator(a, b interface{}) int {
+func Float32Comparator(a, b any) int {
 	aAsserted := a.(float32)
 	bAsserted := b.(float32)
 	switch {
@@ -194,7 +195,7 @@ func Float32Comparator(a, b interface{}) int {
 }
 
 // Float64Comparator provides a basic comparison on float64
-func Float64Comparator(a, b interface{}) int {
+func Float64Comparator(a, b any) int {
 	aAsserted := a.(float64)
 	bAsserted := b.(float64)
 	switch {
@@ -208,7 +209,7 @@ func Float64Comparator(a, b interface{}) int {
 }
 
 // ByteComparator provides a basic comparison on byte
-func ByteComparator(a, b interface{}) int {
+func ByteComparator(a, b any) int {
 	aAsserted := a.(byte)
 	bAsserted := b.(byte)
 	switch {
@@ -222,7 +223,7 @@ func ByteComparator(a, b interface{}) int {
 }
 
 // RuneComparator provides a basic comparison on rune
-func RuneComparator(a, b interface{}) int {
+func RuneComparator(a, b any) int {
 	aAsserted := a.(rune)
 	bAsserted := b.(rune)
 	switch {
@@ -236,7 +237,7 @@ func RuneComparator(a, b interface{}) int {
 }
 
 // TimeComparator provides a basic comparison on time.Time
-func TimeComparator(a, b interface{}) int {
+func TimeComparator(a, b any) int {
 	aAsserted := a.(time.Time)
 	bAsserted := b.(time.Time)
 

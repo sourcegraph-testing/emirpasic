@@ -68,21 +68,21 @@ func (m *Map) ToJSON() ([]byte, error) {
 
 // FromJSON populates map from the input JSON representation.
 func (m *Map) FromJSON(data []byte) error {
-	elements := make(map[string]interface{})
+	elements := make(map[string]any)
 	err := json.Unmarshal(data, &elements)
 	if err != nil {
 		return err
 	}
 
 	index := make(map[string]int)
-	var keys []interface{}
+	var keys []any
 	for key := range elements {
 		keys = append(keys, key)
 		esc, _ := json.Marshal(key)
 		index[key] = bytes.Index(data, esc)
 	}
 
-	byIndex := func(a, b interface{}) int {
+	byIndex := func(a, b any) int {
 		key1 := a.(string)
 		key2 := b.(string)
 		index1 := index[key1]

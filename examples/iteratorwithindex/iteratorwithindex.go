@@ -51,7 +51,7 @@ func main() {
 	}
 
 	// Seek element starting with "b"
-	seek := func(index int, value interface{}) bool {
+	seek := func(index int, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 

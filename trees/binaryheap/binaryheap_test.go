@@ -263,7 +263,7 @@ func TestBinaryHeapIteratorLast(t *testing.T) {
 
 func TestBinaryHeapIteratorNextTo(t *testing.T) {
 	// Sample seek function, i.e. string starting with "b"
-	seek := func(index int, value interface{}) bool {
+	seek := func(index int, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 
@@ -315,7 +315,7 @@ func TestBinaryHeapIteratorNextTo(t *testing.T) {
 
 func TestBinaryHeapIteratorPrevTo(t *testing.T) {
 	// Sample seek function, i.e. string starting with "b"
-	seek := func(index int, value interface{}) bool {
+	seek := func(index int, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 
@@ -398,7 +398,7 @@ func TestBinaryHeapSerialization(t *testing.T) {
 	err = heap.FromJSON(bytes)
 	assert()
 
-	bytes, err = json.Marshal([]interface{}{"a", "b", "c", heap})
+	bytes, err = json.Marshal([]any{"a", "b", "c", heap})
 	if err != nil {
 		t.Errorf("Got error %v", err)
 	}

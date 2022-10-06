@@ -29,7 +29,7 @@ type Set struct {
 var itemExists = struct{}{}
 
 // NewWith instantiates a new empty set with the custom comparator.
-func NewWith(comparator utils.Comparator, values ...interface{}) *Set {
+func NewWith(comparator utils.Comparator, values ...any) *Set {
 	set := &Set{tree: rbt.NewWith(comparator)}
 	if len(values) > 0 {
 		set.Add(values...)
@@ -38,7 +38,7 @@ func NewWith(comparator utils.Comparator, values ...interface{}) *Set {
 }
 
 // NewWithIntComparator instantiates a new empty set with the IntComparator, i.e. keys are of type int.
-func NewWithIntComparator(values ...interface{}) *Set {
+func NewWithIntComparator(values ...any) *Set {
 	set := &Set{tree: rbt.NewWithIntComparator()}
 	if len(values) > 0 {
 		set.Add(values...)
@@ -47,7 +47,7 @@ func NewWithIntComparator(values ...interface{}) *Set {
 }
 
 // NewWithStringComparator instantiates a new empty set with the StringComparator, i.e. keys are of type string.
-func NewWithStringComparator(values ...interface{}) *Set {
+func NewWithStringComparator(values ...any) *Set {
 	set := &Set{tree: rbt.NewWithStringComparator()}
 	if len(values) > 0 {
 		set.Add(values...)
@@ -56,14 +56,14 @@ func NewWithStringComparator(values ...interface{}) *Set {
 }
 
 // Add adds the items (one or more) to the set.
-func (set *Set) Add(items ...interface{}) {
+func (set *Set) Add(items ...any) {
 	for _, item := range items {
 		set.tree.Put(item, itemExists)
 	}
 }
 
 // Remove removes the items (one or more) from the set.
-func (set *Set) Remove(items ...interface{}) {
+func (set *Set) Remove(items ...any) {
 	for _, item := range items {
 		set.tree.Remove(item)
 	}
@@ -72,7 +72,7 @@ func (set *Set) Remove(items ...interface{}) {
 // Contains checks weather items (one or more) are present in the set.
 // All items have to be present in the set for the method to return true.
 // Returns true if no arguments are passed at all, i.e. set is always superset of empty set.
-func (set *Set) Contains(items ...interface{}) bool {
+func (set *Set) Contains(items ...any) bool {
 	for _, item := range items {
 		if _, contains := set.tree.Get(item); !contains {
 			return false
@@ -97,7 +97,7 @@ func (set *Set) Clear() {
 }
 
 // Values returns all items in the set.
-func (set *Set) Values() []interface{} {
+func (set *Set) Values() []any {
 	return set.tree.Keys()
 }
 

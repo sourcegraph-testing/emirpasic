@@ -15,7 +15,7 @@ import (
 
 // For testing purposes
 type ContainerTest struct {
-	values []interface{}
+	values []any
 }
 
 func (container ContainerTest) Empty() bool {
@@ -27,10 +27,10 @@ func (container ContainerTest) Size() int {
 }
 
 func (container ContainerTest) Clear() {
-	container.values = []interface{}{}
+	container.values = []any{}
 }
 
-func (container ContainerTest) Values() []interface{} {
+func (container ContainerTest) Values() []any {
 	return container.values
 }
 
@@ -47,7 +47,7 @@ func (container ContainerTest) String() string {
 func TestGetSortedValuesInts(t *testing.T) {
 	container := ContainerTest{}
 	GetSortedValues(container, utils.IntComparator)
-	container.values = []interface{}{5, 1, 3, 2, 4}
+	container.values = []any{5, 1, 3, 2, 4}
 	values := GetSortedValues(container, utils.IntComparator)
 	for i := 1; i < container.Size(); i++ {
 		if values[i-1].(int) > values[i].(int) {
@@ -59,7 +59,7 @@ func TestGetSortedValuesInts(t *testing.T) {
 func TestGetSortedValuesStrings(t *testing.T) {
 	container := ContainerTest{}
 	GetSortedValues(container, utils.StringComparator)
-	container.values = []interface{}{"g", "a", "d", "e", "f", "c", "b"}
+	container.values = []any{"g", "a", "d", "e", "f", "c", "b"}
 	values := GetSortedValues(container, utils.StringComparator)
 	for i := 1; i < container.Size(); i++ {
 		if values[i-1].(string) > values[i].(string) {

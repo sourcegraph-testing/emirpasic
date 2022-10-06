@@ -44,8 +44,8 @@ type Node struct {
 
 // Entry represents the key-value pair contained within nodes
 type Entry struct {
-	Key   interface{}
-	Value interface{}
+	Key   any
+	Value any
 }
 
 // NewWith instantiates a B-tree with the order (maximum number of children) and a custom key comparator.
@@ -69,7 +69,7 @@ func NewWithStringComparator(order int) *Tree {
 // Put inserts key-value pair node into the tree.
 // If key already exists, then its value is updated with the new value.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (tree *Tree) Put(key interface{}, value interface{}) {
+func (tree *Tree) Put(key any, value any) {
 	entry := &Entry{Key: key, Value: value}
 
 	if tree.Root == nil {
@@ -86,7 +86,7 @@ func (tree *Tree) Put(key interface{}, value interface{}) {
 // Get searches the node in the tree by key and returns its value or nil if key is not found in tree.
 // Second return parameter is true if key was found, otherwise false.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (tree *Tree) Get(key interface{}) (value interface{}, found bool) {
+func (tree *Tree) Get(key any) (value any, found bool) {
 	node, index, found := tree.searchRecursively(tree.Root, key)
 	if found {
 		return node.Entries[index].Value, true
@@ -96,14 +96,14 @@ func (tree *Tree) Get(key interface{}) (value interface{}, found bool) {
 
 // GetNode searches the node in the tree by key and returns its node or nil if key is not found in tree.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (tree *Tree) GetNode(key interface{}) *Node {
+func (tree *Tree) GetNode(key any) *Node {
 	node, _, _ := tree.searchRecursively(tree.Root, key)
 	return node
 }
 
 // Remove remove the node from the tree by key.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (tree *Tree) Remove(key interface{}) {
+func (tree *Tree) Remove(key any) {
 	node, index, found := tree.searchRecursively(tree.Root, key)
 	if found {
 		tree.delete(node, index)
@@ -135,8 +135,8 @@ func (node *Node) Size() int {
 }
 
 // Keys returns all keys in-order
-func (tree *Tree) Keys() []interface{} {
-	keys := make([]interface{}, tree.size)
+func (tree *Tree) Keys() []any {
+	keys := make([]any, tree.size)
 	it := tree.Iterator()
 	for i := 0; it.Next(); i++ {
 		keys[i] = it.Key()
@@ -145,8 +145,8 @@ func (tree *Tree) Keys() []interface{} {
 }
 
 // Values returns all values in-order based on the key.
-func (tree *Tree) Values() []interface{} {
-	values := make([]interface{}, tree.size)
+func (tree *Tree) Values() []any {
+	values := make([]any, tree.size)
 	it := tree.Iterator()
 	for i := 0; it.Next(); i++ {
 		values[i] = it.Value()
@@ -171,7 +171,7 @@ func (tree *Tree) Left() *Node {
 }
 
 // LeftKey returns the left-most (min) key or nil if tree is empty.
-func (tree *Tree) LeftKey() interface{} {
+func (tree *Tree) LeftKey() any {
 	if left := tree.Left(); left != nil {
 		return left.Entries[0].Key
 	}
@@ -179,7 +179,7 @@ func (tree *Tree) LeftKey() interface{} {
 }
 
 // LeftValue returns the left-most value or nil if tree is empty.
-func (tree *Tree) LeftValue() interface{} {
+func (tree *Tree) LeftValue() any {
 	if left := tree.Left(); left != nil {
 		return left.Entries[0].Value
 	}
@@ -192,7 +192,7 @@ func (tree *Tree) Right() *Node {
 }
 
 // RightKey returns the right-most (max) key or nil if tree is empty.
-func (tree *Tree) RightKey() interface{} {
+func (tree *Tree) RightKey() any {
 	if right := tree.Right(); right != nil {
 		return right.Entries[len(right.Entries)-1].Key
 	}
@@ -200,7 +200,7 @@ func (tree *Tree) RightKey() interface{} {
 }
 
 // RightValue returns the right-most value or nil if tree is empty.
-func (tree *Tree) RightValue() interface{} {
+func (tree *Tree) RightValue() any {
 	if right := tree.Right(); right != nil {
 		return right.Entries[len(right.Entries)-1].Value
 	}
@@ -277,7 +277,7 @@ func (tree *Tree) middle() int {
 }
 
 // search searches only within the single node among its entries
-func (tree *Tree) search(node *Node, key interface{}) (index int, found bool) {
+func (tree *Tree) search(node *Node, key any) (index int, found bool) {
 	low, high := 0, len(node.Entries)-1
 	var mid int
 	for low <= high {
@@ -296,7 +296,7 @@ func (tree *Tree) search(node *Node, key interface{}) (index int, found bool) {
 }
 
 // searchRecursively searches recursively down the tree starting at the startNode
-func (tree *Tree) searchRecursively(startNode *Node, key interface{}) (node *Node, index int, found bool) {
+func (tree *Tree) searchRecursively(startNode *Node, key any) (node *Node, index int, found bool) {
 	if tree.Empty() {
 		return nil, -1, false
 	}
@@ -448,7 +448,7 @@ func (tree *Tree) right(node *Node) *Node {
 
 // leftSibling returns the node's left sibling and child index (in parent) if it exists, otherwise (nil,-1)
 // key is any of keys in node (could even be deleted).
-func (tree *Tree) leftSibling(node *Node, key interface{}) (*Node, int) {
+func (tree *Tree) leftSibling(node *Node, key any) (*Node, int) {
 	if node.Parent != nil {
 		index, _ := tree.search(node.Parent, key)
 		index--
@@ -461,7 +461,7 @@ func (tree *Tree) leftSibling(node *Node, key interface{}) (*Node, int) {
 
 // rightSibling returns the node's right sibling and child index (in parent) if it exists, otherwise (nil,-1)
 // key is any of keys in node (could even be deleted).
-func (tree *Tree) rightSibling(node *Node, key interface{}) (*Node, int) {
+func (tree *Tree) rightSibling(node *Node, key any) (*Node, int) {
 	if node.Parent != nil {
 		index, _ := tree.search(node.Parent, key)
 		index++
@@ -497,7 +497,7 @@ func (tree *Tree) delete(node *Node, index int) {
 
 // rebalance rebalances the tree after deletion if necessary and returns true, otherwise false.
 // Note that we first delete the entry and then call rebalance, thus the passed deleted key as reference.
-func (tree *Tree) rebalance(node *Node, deletedKey interface{}) {
+func (tree *Tree) rebalance(node *Node, deletedKey any) {
 	// check if rebalancing is needed
 	if node == nil || len(node.Entries) >= tree.minEntries() {
 		return

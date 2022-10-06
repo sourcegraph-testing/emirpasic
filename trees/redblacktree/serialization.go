@@ -16,7 +16,7 @@ var _ containers.JSONDeserializer = (*Tree)(nil)
 
 // ToJSON outputs the JSON representation of the tree.
 func (tree *Tree) ToJSON() ([]byte, error) {
-	elements := make(map[string]interface{})
+	elements := make(map[string]any)
 	it := tree.Iterator()
 	for it.Next() {
 		elements[utils.ToString(it.Key())] = it.Value()
@@ -26,7 +26,7 @@ func (tree *Tree) ToJSON() ([]byte, error) {
 
 // FromJSON populates the tree from the input JSON representation.
 func (tree *Tree) FromJSON(data []byte) error {
-	elements := make(map[string]interface{})
+	elements := make(map[string]any)
 	err := json.Unmarshal(data, &elements)
 	if err == nil {
 		tree.Clear()

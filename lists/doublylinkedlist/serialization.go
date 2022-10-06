@@ -20,7 +20,7 @@ func (list *List) ToJSON() ([]byte, error) {
 
 // FromJSON populates list's elements from the input JSON representation.
 func (list *List) FromJSON(data []byte) error {
-	elements := []interface{}{}
+	elements := []any{}
 	err := json.Unmarshal(data, &elements)
 	if err == nil {
 		list.Clear()

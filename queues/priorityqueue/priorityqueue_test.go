@@ -23,7 +23,7 @@ func (element Element) String() string {
 }
 
 // Comparator function (sort by priority value in descending order)
-func byPriority(a, b interface{}) int {
+func byPriority(a, b any) int {
 	return -utils.IntComparator( // Note "-" for descending order
 		a.(Element).priority,
 		b.(Element).priority,
@@ -319,7 +319,7 @@ func TestBinaryQueueIteratorLast(t *testing.T) {
 
 func TestBinaryQueueIteratorNextTo(t *testing.T) {
 	// Sample seek function, i.e. string starting with "b"
-	seek := func(index int, value interface{}) bool {
+	seek := func(index int, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 
@@ -371,7 +371,7 @@ func TestBinaryQueueIteratorNextTo(t *testing.T) {
 
 func TestBinaryQueueIteratorPrevTo(t *testing.T) {
 	// Sample seek function, i.e. string starting with "b"
-	seek := func(index int, value interface{}) bool {
+	seek := func(index int, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 
@@ -454,7 +454,7 @@ func TestBinaryQueueSerialization(t *testing.T) {
 	err = queue.FromJSON(bytes)
 	assert()
 
-	bytes, err = json.Marshal([]interface{}{"a", "b", "c", queue})
+	bytes, err = json.Marshal([]any{"a", "b", "c", queue})
 	if err != nil {
 		t.Errorf("Got error %v", err)
 	}
