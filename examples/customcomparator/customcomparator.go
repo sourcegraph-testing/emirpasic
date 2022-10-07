@@ -16,7 +16,7 @@ type User struct {
 }
 
 // Comparator function (sort by IDs)
-func byID(a, b interface{}) int {
+func byID(a, b any) int {
 
 	// Type assertion, program will panic if this is not respected
 	c1 := a.(User)

@@ -14,9 +14,9 @@ import "github.com/emirpasic/gods/containers"
 
 // Queue interface that all queues implement
 type Queue interface {
-	Enqueue(value interface{})
-	Dequeue() (value interface{}, ok bool)
-	Peek() (value interface{}, ok bool)
+	Enqueue(value any)
+	Dequeue() (value any, ok bool)
+	Peek() (value any, ok bool)
 
 	containers.Container
 	// Empty() bool

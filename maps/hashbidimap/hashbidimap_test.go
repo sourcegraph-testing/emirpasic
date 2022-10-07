@@ -25,15 +25,15 @@ func TestMapPut(t *testing.T) {
 	if actualValue := m.Size(); actualValue != 7 {
 		t.Errorf("Got %v expected %v", actualValue, 7)
 	}
-	if actualValue, expectedValue := m.Keys(), []interface{}{1, 2, 3, 4, 5, 6, 7}; !sameElements(actualValue, expectedValue) {
+	if actualValue, expectedValue := m.Keys(), []any{1, 2, 3, 4, 5, 6, 7}; !sameElements(actualValue, expectedValue) {
 		t.Errorf("Got %v expected %v", actualValue, expectedValue)
 	}
-	if actualValue, expectedValue := m.Values(), []interface{}{"a", "b", "c", "d", "e", "f", "g"}; !sameElements(actualValue, expectedValue) {
+	if actualValue, expectedValue := m.Values(), []any{"a", "b", "c", "d", "e", "f", "g"}; !sameElements(actualValue, expectedValue) {
 		t.Errorf("Got %v expected %v", actualValue, expectedValue)
 	}
 
 	// key,expectedValue,expectedFound
-	tests1 := [][]interface{}{
+	tests1 := [][]any{
 		{1, "a", true},
 		{2, "b", true},
 		{3, "c", true},
@@ -70,18 +70,18 @@ func TestMapRemove(t *testing.T) {
 	m.Remove(8)
 	m.Remove(5)
 
-	if actualValue, expectedValue := m.Keys(), []interface{}{1, 2, 3, 4}; !sameElements(actualValue, expectedValue) {
+	if actualValue, expectedValue := m.Keys(), []any{1, 2, 3, 4}; !sameElements(actualValue, expectedValue) {
 		t.Errorf("Got %v expected %v", actualValue, expectedValue)
 	}
 
-	if actualValue, expectedValue := m.Values(), []interface{}{"a", "b", "c", "d"}; !sameElements(actualValue, expectedValue) {
+	if actualValue, expectedValue := m.Values(), []any{"a", "b", "c", "d"}; !sameElements(actualValue, expectedValue) {
 		t.Errorf("Got %v expected %v", actualValue, expectedValue)
 	}
 	if actualValue := m.Size(); actualValue != 4 {
 		t.Errorf("Got %v expected %v", actualValue, 4)
 	}
 
-	tests2 := [][]interface{}{
+	tests2 := [][]any{
 		{1, "a", true},
 		{2, "b", true},
 		{3, "c", true},
@@ -132,7 +132,7 @@ func TestMapGetKey(t *testing.T) {
 	m.Put(1, "a") //overwrite
 
 	// key,expectedValue,expectedFound
-	tests1 := [][]interface{}{
+	tests1 := [][]any{
 		{1, "a", true},
 		{2, "b", true},
 		{3, "c", true},
@@ -160,10 +160,10 @@ func TestMapSerialization(t *testing.T) {
 
 	var err error
 	assert := func() {
-		if actualValue, expectedValue := m.Keys(), []interface{}{"a", "b", "c"}; !sameElements(actualValue, expectedValue) {
+		if actualValue, expectedValue := m.Keys(), []any{"a", "b", "c"}; !sameElements(actualValue, expectedValue) {
 			t.Errorf("Got %v expected %v", actualValue, expectedValue)
 		}
-		if actualValue, expectedValue := m.Values(), []interface{}{1.0, 2.0, 3.0}; !sameElements(actualValue, expectedValue) {
+		if actualValue, expectedValue := m.Values(), []any{1.0, 2.0, 3.0}; !sameElements(actualValue, expectedValue) {
 			t.Errorf("Got %v expected %v", actualValue, expectedValue)
 		}
 		if actualValue, expectedValue := m.Size(), 3; actualValue != expectedValue {
@@ -182,7 +182,7 @@ func TestMapSerialization(t *testing.T) {
 	err = m.FromJSON(bytes)
 	assert()
 
-	bytes, err = json.Marshal([]interface{}{"a", "b", "c", m})
+	bytes, err = json.Marshal([]any{"a", "b", "c", m})
 	if err != nil {
 		t.Errorf("Got error %v", err)
 	}
@@ -201,7 +201,7 @@ func TestMapString(t *testing.T) {
 	}
 }
 
-func sameElements(a []interface{}, b []interface{}) bool {
+func sameElements(a []any, b []any) bool {
 	if len(a) != len(b) {
 		return false
 	}

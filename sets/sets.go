@@ -13,9 +13,9 @@ import "github.com/emirpasic/gods/containers"
 
 // Set interface that all sets implement
 type Set interface {
-	Add(elements ...interface{})
-	Remove(elements ...interface{})
-	Contains(elements ...interface{}) bool
+	Add(elements ...any)
+	Remove(elements ...any)
+	Contains(elements ...any) bool
 	// Intersection(another *Set) *Set
 	// Union(another *Set) *Set
 	// Difference(another *Set) *Set

@@ -12,7 +12,7 @@ import (
 func TestIntComparator(t *testing.T) {
 
 	// i1,i2,expected
-	tests := [][]interface{}{
+	tests := [][]any{
 		{1, 1, 0},
 		{1, 2, -1},
 		{2, 1, 1},
@@ -34,7 +34,7 @@ func TestIntComparator(t *testing.T) {
 func TestStringComparator(t *testing.T) {
 
 	// s1,s2,expected
-	tests := [][]interface{}{
+	tests := [][]any{
 		{"a", "a", 0},
 		{"a", "b", -1},
 		{"b", "a", 1},
@@ -59,7 +59,7 @@ func TestTimeComparator(t *testing.T) {
 	now := time.Now()
 
 	// i1,i2,expected
-	tests := [][]interface{}{
+	tests := [][]any{
 		{now, now, 0},
 		{now.Add(24 * 7 * 2 * time.Hour), now, 1},
 		{now, now.Add(24 * 7 * 2 * time.Hour), -1},
@@ -81,7 +81,7 @@ func TestCustomComparator(t *testing.T) {
 		name string
 	}
 
-	byID := func(a, b interface{}) int {
+	byID := func(a, b any) int {
 		c1 := a.(Custom)
 		c2 := b.(Custom)
 		switch {
@@ -95,7 +95,7 @@ func TestCustomComparator(t *testing.T) {
 	}
 
 	// o1,o2,expected
-	tests := [][]interface{}{
+	tests := [][]any{
 		{Custom{1, "a"}, Custom{1, "a"}, 0},
 		{Custom{1, "a"}, Custom{2, "b"}, -1},
 		{Custom{2, "b"}, Custom{1, "a"}, 1},
@@ -112,7 +112,7 @@ func TestCustomComparator(t *testing.T) {
 }
 
 func TestInt8ComparatorComparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{int8(1), int8(1), 0},
 		{int8(0), int8(1), -1},
 		{int8(1), int8(0), 1},
@@ -127,7 +127,7 @@ func TestInt8ComparatorComparator(t *testing.T) {
 }
 
 func TestInt16Comparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{int16(1), int16(1), 0},
 		{int16(0), int16(1), -1},
 		{int16(1), int16(0), 1},
@@ -142,7 +142,7 @@ func TestInt16Comparator(t *testing.T) {
 }
 
 func TestInt32Comparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{int32(1), int32(1), 0},
 		{int32(0), int32(1), -1},
 		{int32(1), int32(0), 1},
@@ -157,7 +157,7 @@ func TestInt32Comparator(t *testing.T) {
 }
 
 func TestInt64Comparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{int64(1), int64(1), 0},
 		{int64(0), int64(1), -1},
 		{int64(1), int64(0), 1},
@@ -172,7 +172,7 @@ func TestInt64Comparator(t *testing.T) {
 }
 
 func TestUIntComparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{uint(1), uint(1), 0},
 		{uint(0), uint(1), -1},
 		{uint(1), uint(0), 1},
@@ -187,7 +187,7 @@ func TestUIntComparator(t *testing.T) {
 }
 
 func TestUInt8Comparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{uint8(1), uint8(1), 0},
 		{uint8(0), uint8(1), -1},
 		{uint8(1), uint8(0), 1},
@@ -202,7 +202,7 @@ func TestUInt8Comparator(t *testing.T) {
 }
 
 func TestUInt16Comparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{uint16(1), uint16(1), 0},
 		{uint16(0), uint16(1), -1},
 		{uint16(1), uint16(0), 1},
@@ -217,7 +217,7 @@ func TestUInt16Comparator(t *testing.T) {
 }
 
 func TestUInt32Comparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{uint32(1), uint32(1), 0},
 		{uint32(0), uint32(1), -1},
 		{uint32(1), uint32(0), 1},
@@ -232,7 +232,7 @@ func TestUInt32Comparator(t *testing.T) {
 }
 
 func TestUInt64Comparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{uint64(1), uint64(1), 0},
 		{uint64(0), uint64(1), -1},
 		{uint64(1), uint64(0), 1},
@@ -247,7 +247,7 @@ func TestUInt64Comparator(t *testing.T) {
 }
 
 func TestFloat32Comparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{float32(1.1), float32(1.1), 0},
 		{float32(0.1), float32(1.1), -1},
 		{float32(1.1), float32(0.1), 1},
@@ -262,7 +262,7 @@ func TestFloat32Comparator(t *testing.T) {
 }
 
 func TestFloat64Comparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{float64(1.1), float64(1.1), 0},
 		{float64(0.1), float64(1.1), -1},
 		{float64(1.1), float64(0.1), 1},
@@ -277,7 +277,7 @@ func TestFloat64Comparator(t *testing.T) {
 }
 
 func TestByteComparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{byte(1), byte(1), 0},
 		{byte(0), byte(1), -1},
 		{byte(1), byte(0), 1},
@@ -292,7 +292,7 @@ func TestByteComparator(t *testing.T) {
 }
 
 func TestRuneComparator(t *testing.T) {
-	tests := [][]interface{}{
+	tests := [][]any{
 		{rune(1), rune(1), 0},
 		{rune(0), rune(1), -1},
 		{rune(1), rune(0), 1},

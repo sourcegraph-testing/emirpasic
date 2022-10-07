@@ -159,7 +159,7 @@ func TestQueueIteratorFirst(t *testing.T) {
 
 func TestQueueIteratorNextTo(t *testing.T) {
 	// Sample seek function, i.e. string starting with "b"
-	seek := func(index int, value interface{}) bool {
+	seek := func(index int, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 
@@ -236,7 +236,7 @@ func TestQueueSerialization(t *testing.T) {
 	err = queue.FromJSON(bytes)
 	assert()
 
-	bytes, err = json.Marshal([]interface{}{"a", "b", "c", queue})
+	bytes, err = json.Marshal([]any{"a", "b", "c", queue})
 	if err != nil {
 		t.Errorf("Got error %v", err)
 	}

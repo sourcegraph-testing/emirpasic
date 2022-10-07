@@ -38,19 +38,19 @@ func NewWith(comparator utils.Comparator) *Queue {
 }
 
 // Enqueue adds a value to the end of the queue
-func (queue *Queue) Enqueue(value interface{}) {
+func (queue *Queue) Enqueue(value any) {
 	queue.heap.Push(value)
 }
 
 // Dequeue removes first element of the queue and returns it, or nil if queue is empty.
 // Second return parameter is true, unless the queue was empty and there was nothing to dequeue.
-func (queue *Queue) Dequeue() (value interface{}, ok bool) {
+func (queue *Queue) Dequeue() (value any, ok bool) {
 	return queue.heap.Pop()
 }
 
 // Peek returns top element on the queue without removing it, or nil if queue is empty.
 // Second return parameter is true, unless the queue was empty and there was nothing to peek.
-func (queue *Queue) Peek() (value interface{}, ok bool) {
+func (queue *Queue) Peek() (value any, ok bool) {
 	return queue.heap.Peek()
 }
 
@@ -70,7 +70,7 @@ func (queue *Queue) Clear() {
 }
 
 // Values returns all elements in the queue.
-func (queue *Queue) Values() []interface{} {
+func (queue *Queue) Values() []any {
 	return queue.heap.Values()
 }
 

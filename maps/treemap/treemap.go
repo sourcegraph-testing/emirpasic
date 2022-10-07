@@ -44,20 +44,20 @@ func NewWithStringComparator() *Map {
 
 // Put inserts key-value pair into the map.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (m *Map) Put(key interface{}, value interface{}) {
+func (m *Map) Put(key any, value any) {
 	m.tree.Put(key, value)
 }
 
 // Get searches the element in the map by key and returns its value or nil if key is not found in tree.
 // Second return parameter is true if key was found, otherwise false.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (m *Map) Get(key interface{}) (value interface{}, found bool) {
+func (m *Map) Get(key any) (value any, found bool) {
 	return m.tree.Get(key)
 }
 
 // Remove removes the element from the map by key.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (m *Map) Remove(key interface{}) {
+func (m *Map) Remove(key any) {
 	m.tree.Remove(key)
 }
 
@@ -72,12 +72,12 @@ func (m *Map) Size() int {
 }
 
 // Keys returns all keys in-order
-func (m *Map) Keys() []interface{} {
+func (m *Map) Keys() []any {
 	return m.tree.Keys()
 }
 
 // Values returns all values in-order based on the key.
-func (m *Map) Values() []interface{} {
+func (m *Map) Values() []any {
 	return m.tree.Values()
 }
 
@@ -88,7 +88,7 @@ func (m *Map) Clear() {
 
 // Min returns the minimum key and its value from the tree map.
 // Returns nil, nil if map is empty.
-func (m *Map) Min() (key interface{}, value interface{}) {
+func (m *Map) Min() (key any, value any) {
 	if node := m.tree.Left(); node != nil {
 		return node.Key, node.Value
 	}
@@ -97,7 +97,7 @@ func (m *Map) Min() (key interface{}, value interface{}) {
 
 // Max returns the maximum key and its value from the tree map.
 // Returns nil, nil if map is empty.
-func (m *Map) Max() (key interface{}, value interface{}) {
+func (m *Map) Max() (key any, value any) {
 	if node := m.tree.Right(); node != nil {
 		return node.Key, node.Value
 	}
@@ -113,7 +113,7 @@ func (m *Map) Max() (key interface{}, value interface{}) {
 // all keys in the map are larger than the given key.
 //
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (m *Map) Floor(key interface{}) (foundKey interface{}, foundValue interface{}) {
+func (m *Map) Floor(key any) (foundKey any, foundValue any) {
 	node, found := m.tree.Floor(key)
 	if found {
 		return node.Key, node.Value
@@ -130,7 +130,7 @@ func (m *Map) Floor(key interface{}) (foundKey interface{}, foundValue interface
 // all keys in the map are smaller than the given key.
 //
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (m *Map) Ceiling(key interface{}) (foundKey interface{}, foundValue interface{}) {
+func (m *Map) Ceiling(key any) (foundKey any, foundValue any) {
 	node, found := m.tree.Ceiling(key)
 	if found {
 		return node.Key, node.Value

@@ -23,7 +23,7 @@ var _ queues.Queue = (*Queue)(nil)
 
 // Queue holds values in a slice.
 type Queue struct {
-	values  []interface{}
+	values  []any
 	start   int
 	end     int
 	full    bool
@@ -43,7 +43,7 @@ func New(maxSize int) *Queue {
 }
 
 // Enqueue adds a value to the end of the queue
-func (queue *Queue) Enqueue(value interface{}) {
+func (queue *Queue) Enqueue(value any) {
 	if queue.Full() {
 		queue.Dequeue()
 	}
@@ -61,7 +61,7 @@ func (queue *Queue) Enqueue(value interface{}) {
 
 // Dequeue removes first element of the queue and returns it, or nil if queue is empty.
 // Second return parameter is true, unless the queue was empty and there was nothing to dequeue.
-func (queue *Queue) Dequeue() (value interface{}, ok bool) {
+func (queue *Queue) Dequeue() (value any, ok bool) {
 	if queue.Empty() {
 		return nil, false
 	}
@@ -84,7 +84,7 @@ func (queue *Queue) Dequeue() (value interface{}, ok bool) {
 
 // Peek returns first element of the queue without removing it, or nil if queue is empty.
 // Second return parameter is true, unless the queue was empty and there was nothing to peek.
-func (queue *Queue) Peek() (value interface{}, ok bool) {
+func (queue *Queue) Peek() (value any, ok bool) {
 	if queue.Empty() {
 		return nil, false
 	}
@@ -108,7 +108,7 @@ func (queue *Queue) Size() int {
 
 // Clear removes all elements from the queue.
 func (queue *Queue) Clear() {
-	queue.values = make([]interface{}, queue.maxSize, queue.maxSize)
+	queue.values = make([]any, queue.maxSize, queue.maxSize)
 	queue.start = 0
 	queue.end = 0
 	queue.full = false
@@ -116,8 +116,8 @@ func (queue *Queue) Clear() {
 }
 
 // Values returns all elements in the queue (FIFO order).
-func (queue *Queue) Values() []interface{} {
-	values := make([]interface{}, queue.Size(), queue.Size())
+func (queue *Queue) Values() []any {
+	values := make([]any, queue.Size(), queue.Size())
 	for i := 0; i < queue.Size(); i++ {
 		values[i] = queue.values[(queue.start+i)%queue.maxSize]
 	}

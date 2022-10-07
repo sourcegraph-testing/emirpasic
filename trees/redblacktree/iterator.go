@@ -115,13 +115,13 @@ between:
 
 // Value returns the current element's value.
 // Does not modify the state of the iterator.
-func (iterator *Iterator) Value() interface{} {
+func (iterator *Iterator) Value() any {
 	return iterator.node.Value
 }
 
 // Key returns the current element's key.
 // Does not modify the state of the iterator.
-func (iterator *Iterator) Key() interface{} {
+func (iterator *Iterator) Key() any {
 	return iterator.node.Key
 }
 
@@ -165,7 +165,7 @@ func (iterator *Iterator) Last() bool {
 // passed function, and returns true if there was a next element in the container.
 // If NextTo() returns true, then next element's key and value can be retrieved by Key() and Value().
 // Modifies the state of the iterator.
-func (iterator *Iterator) NextTo(f func(key interface{}, value interface{}) bool) bool {
+func (iterator *Iterator) NextTo(f func(key any, value any) bool) bool {
 	for iterator.Next() {
 		key, value := iterator.Key(), iterator.Value()
 		if f(key, value) {
@@ -179,7 +179,7 @@ func (iterator *Iterator) NextTo(f func(key interface{}, value interface{}) bool
 // passed function, and returns true if there was a next element in the container.
 // If PrevTo() returns true, then next element's key and value can be retrieved by Key() and Value().
 // Modifies the state of the iterator.
-func (iterator *Iterator) PrevTo(f func(key interface{}, value interface{}) bool) bool {
+func (iterator *Iterator) PrevTo(f func(key any, value any) bool) bool {
 	for iterator.Prev() {
 		key, value := iterator.Key(), iterator.Value()
 		if f(key, value) {

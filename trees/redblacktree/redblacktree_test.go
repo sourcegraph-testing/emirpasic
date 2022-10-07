@@ -79,7 +79,7 @@ func TestRedBlackTreePut(t *testing.T) {
 		t.Errorf("Got %v expected %v", actualValue, expectedValue)
 	}
 
-	tests1 := [][]interface{}{
+	tests1 := [][]any{
 		{1, "a", true},
 		{2, "b", true},
 		{3, "c", true},
@@ -129,7 +129,7 @@ func TestRedBlackTreeRemove(t *testing.T) {
 		t.Errorf("Got %v expected %v", actualValue, 7)
 	}
 
-	tests2 := [][]interface{}{
+	tests2 := [][]any{
 		{1, "a", true},
 		{2, "b", true},
 		{3, "c", true},
@@ -552,7 +552,7 @@ func TestRedBlackTreeIteratorLast(t *testing.T) {
 
 func TestRedBlackTreeIteratorNextTo(t *testing.T) {
 	// Sample seek function, i.e. string starting with "b"
-	seek := func(index interface{}, value interface{}) bool {
+	seek := func(index any, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 
@@ -604,7 +604,7 @@ func TestRedBlackTreeIteratorNextTo(t *testing.T) {
 
 func TestRedBlackTreeIteratorPrevTo(t *testing.T) {
 	// Sample seek function, i.e. string starting with "b"
-	seek := func(index interface{}, value interface{}) bool {
+	seek := func(index any, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 
@@ -686,7 +686,7 @@ func TestRedBlackTreeSerialization(t *testing.T) {
 	err = tree.FromJSON(bytes)
 	assert()
 
-	bytes, err = json.Marshal([]interface{}{"a", "b", "c", tree})
+	bytes, err = json.Marshal([]any{"a", "b", "c", tree})
 	if err != nil {
 		t.Errorf("Got error %v", err)
 	}

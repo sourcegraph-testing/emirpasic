@@ -16,7 +16,7 @@ type Element struct {
 }
 
 // Comparator function (sort by element's priority value in descending order)
-func byPriority(a, b interface{}) int {
+func byPriority(a, b any) int {
 	priorityA := a.(Element).priority
 	priorityB := b.(Element).priority
 	return -utils.IntComparator(priorityA, priorityB) // "-" descending order

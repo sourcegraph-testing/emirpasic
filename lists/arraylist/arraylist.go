@@ -22,7 +22,7 @@ var _ lists.List = (*List)(nil)
 
 // List holds the elements in a slice
 type List struct {
-	elements []interface{}
+	elements []any
 	size     int
 }
 
@@ -32,7 +32,7 @@ const (
 )
 
 // New instantiates a new list and adds the passed values, if any, to the list
-func New(values ...interface{}) *List {
+func New(values ...any) *List {
 	list := &List{}
 	if len(values) > 0 {
 		list.Add(values...)
@@ -41,7 +41,7 @@ func New(values ...interface{}) *List {
 }
 
 // Add appends a value at the end of the list
-func (list *List) Add(values ...interface{}) {
+func (list *List) Add(values ...any) {
 	list.growBy(len(values))
 	for _, value := range values {
 		list.elements[list.size] = value
@@ -51,7 +51,7 @@ func (list *List) Add(values ...interface{}) {
 
 // Get returns the element at index.
 // Second return parameter is true if index is within bounds of the array and array is not empty, otherwise false.
-func (list *List) Get(index int) (interface{}, bool) {
+func (list *List) Get(index int) (any, bool) {
 
 	if !list.withinRange(index) {
 		return nil, false
@@ -78,7 +78,7 @@ func (list *List) Remove(index int) {
 // All elements have to be present in the set for the method to return true.
 // Performance time complexity of n^2.
 // Returns true if no arguments are passed at all, i.e. set is always super-set of empty set.
-func (list *List) Contains(values ...interface{}) bool {
+func (list *List) Contains(values ...any) bool {
 
 	for _, searchValue := range values {
 		found := false
@@ -96,14 +96,14 @@ func (list *List) Contains(values ...interface{}) bool {
 }
 
 // Values returns all elements in the list.
-func (list *List) Values() []interface{} {
-	newElements := make([]interface{}, list.size, list.size)
+func (list *List) Values() []any {
+	newElements := make([]any, list.size, list.size)
 	copy(newElements, list.elements[:list.size])
 	return newElements
 }
 
-//IndexOf returns index of provided element
-func (list *List) IndexOf(value interface{}) int {
+// IndexOf returns index of provided element
+func (list *List) IndexOf(value any) int {
 	if list.size == 0 {
 		return -1
 	}
@@ -128,7 +128,7 @@ func (list *List) Size() int {
 // Clear removes all elements from the list.
 func (list *List) Clear() {
 	list.size = 0
-	list.elements = []interface{}{}
+	list.elements = []any{}
 }
 
 // Sort sorts values (in-place) using.
@@ -149,7 +149,7 @@ func (list *List) Swap(i, j int) {
 // Insert inserts values at specified index position shifting the value at that position (if any) and any subsequent elements to the right.
 // Does not do anything if position is negative or bigger than list's size
 // Note: position equal to list's size is valid, i.e. append.
-func (list *List) Insert(index int, values ...interface{}) {
+func (list *List) Insert(index int, values ...any) {
 
 	if !list.withinRange(index) {
 		// Append
@@ -169,7 +169,7 @@ func (list *List) Insert(index int, values ...interface{}) {
 // Set the value at specified index
 // Does not do anything if position is negative or bigger than list's size
 // Note: position equal to list's size is valid, i.e. append.
-func (list *List) Set(index int, value interface{}) {
+func (list *List) Set(index int, value any) {
 
 	if !list.withinRange(index) {
 		// Append
@@ -199,7 +199,7 @@ func (list *List) withinRange(index int) bool {
 }
 
 func (list *List) resize(cap int) {
-	newElements := make([]interface{}, cap, cap)
+	newElements := make([]any, cap, cap)
 	copy(newElements, list.elements)
 	list.elements = newElements
 }

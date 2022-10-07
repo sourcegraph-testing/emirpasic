@@ -21,28 +21,28 @@ var _ maps.Map = (*Map)(nil)
 
 // Map holds the elements in go's native map
 type Map struct {
-	m map[interface{}]interface{}
+	m map[any]any
 }
 
 // New instantiates a hash map.
 func New() *Map {
-	return &Map{m: make(map[interface{}]interface{})}
+	return &Map{m: make(map[any]any)}
 }
 
 // Put inserts element into the map.
-func (m *Map) Put(key interface{}, value interface{}) {
+func (m *Map) Put(key any, value any) {
 	m.m[key] = value
 }
 
 // Get searches the element in the map by key and returns its value or nil if key is not found in map.
 // Second return parameter is true if key was found, otherwise false.
-func (m *Map) Get(key interface{}) (value interface{}, found bool) {
+func (m *Map) Get(key any) (value any, found bool) {
 	value, found = m.m[key]
 	return
 }
 
 // Remove removes the element from the map by key.
-func (m *Map) Remove(key interface{}) {
+func (m *Map) Remove(key any) {
 	delete(m.m, key)
 }
 
@@ -57,8 +57,8 @@ func (m *Map) Size() int {
 }
 
 // Keys returns all keys (random order).
-func (m *Map) Keys() []interface{} {
-	keys := make([]interface{}, m.Size())
+func (m *Map) Keys() []any {
+	keys := make([]any, m.Size())
 	count := 0
 	for key := range m.m {
 		keys[count] = key
@@ -68,8 +68,8 @@ func (m *Map) Keys() []interface{} {
 }
 
 // Values returns all values (random order).
-func (m *Map) Values() []interface{} {
-	values := make([]interface{}, m.Size())
+func (m *Map) Values() []any {
+	values := make([]any, m.Size())
 	count := 0
 	for _, value := range m.m {
 		values[count] = value
@@ -80,7 +80,7 @@ func (m *Map) Values() []interface{} {
 
 // Clear removes all elements from the map.
 func (m *Map) Clear() {
-	m.m = make(map[interface{}]interface{})
+	m.m = make(map[any]any)
 }
 
 // String returns a string representation of container

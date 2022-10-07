@@ -15,7 +15,7 @@ type RedBlackTreeExtended struct {
 }
 
 // GetMin gets the min value and flag if found
-func (tree *RedBlackTreeExtended) GetMin() (value interface{}, found bool) {
+func (tree *RedBlackTreeExtended) GetMin() (value any, found bool) {
 	node, found := tree.getMinFromNode(tree.Root)
 	if node != nil {
 		return node.Value, found
@@ -24,7 +24,7 @@ func (tree *RedBlackTreeExtended) GetMin() (value interface{}, found bool) {
 }
 
 // GetMax gets the max value and flag if found
-func (tree *RedBlackTreeExtended) GetMax() (value interface{}, found bool) {
+func (tree *RedBlackTreeExtended) GetMax() (value any, found bool) {
 	node, found := tree.getMaxFromNode(tree.Root)
 	if node != nil {
 		return node.Value, found
@@ -33,7 +33,7 @@ func (tree *RedBlackTreeExtended) GetMax() (value interface{}, found bool) {
 }
 
 // RemoveMin removes the min value and flag if found
-func (tree *RedBlackTreeExtended) RemoveMin() (value interface{}, deleted bool) {
+func (tree *RedBlackTreeExtended) RemoveMin() (value any, deleted bool) {
 	node, found := tree.getMinFromNode(tree.Root)
 	if found {
 		tree.Remove(node.Key)
@@ -43,7 +43,7 @@ func (tree *RedBlackTreeExtended) RemoveMin() (value interface{}, deleted bool) 
 }
 
 // RemoveMax removes the max value and flag if found
-func (tree *RedBlackTreeExtended) RemoveMax() (value interface{}, deleted bool) {
+func (tree *RedBlackTreeExtended) RemoveMax() (value any, deleted bool) {
 	node, found := tree.getMaxFromNode(tree.Root)
 	if found {
 		tree.Remove(node.Key)

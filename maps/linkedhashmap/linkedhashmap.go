@@ -23,21 +23,21 @@ var _ maps.Map = (*Map)(nil)
 
 // Map holds the elements in a regular hash table, and uses doubly-linked list to store key ordering.
 type Map struct {
-	table    map[interface{}]interface{}
+	table    map[any]any
 	ordering *doublylinkedlist.List
 }
 
 // New instantiates a linked-hash-map.
 func New() *Map {
 	return &Map{
-		table:    make(map[interface{}]interface{}),
+		table:    make(map[any]any),
 		ordering: doublylinkedlist.New(),
 	}
 }
 
 // Put inserts key-value pair into the map.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (m *Map) Put(key interface{}, value interface{}) {
+func (m *Map) Put(key any, value any) {
 	if _, contains := m.table[key]; !contains {
 		m.ordering.Append(key)
 	}
@@ -47,7 +47,7 @@ func (m *Map) Put(key interface{}, value interface{}) {
 // Get searches the element in the map by key and returns its value or nil if key is not found in tree.
 // Second return parameter is true if key was found, otherwise false.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (m *Map) Get(key interface{}) (value interface{}, found bool) {
+func (m *Map) Get(key any) (value any, found bool) {
 	value = m.table[key]
 	found = value != nil
 	return
@@ -55,7 +55,7 @@ func (m *Map) Get(key interface{}) (value interface{}, found bool) {
 
 // Remove removes the element from the map by key.
 // Key should adhere to the comparator's type assertion, otherwise method panics.
-func (m *Map) Remove(key interface{}) {
+func (m *Map) Remove(key any) {
 	if _, contains := m.table[key]; contains {
 		delete(m.table, key)
 		index := m.ordering.IndexOf(key)
@@ -74,13 +74,13 @@ func (m *Map) Size() int {
 }
 
 // Keys returns all keys in-order
-func (m *Map) Keys() []interface{} {
+func (m *Map) Keys() []any {
 	return m.ordering.Values()
 }
 
 // Values returns all values in-order based on the key.
-func (m *Map) Values() []interface{} {
-	values := make([]interface{}, m.Size())
+func (m *Map) Values() []any {
+	values := make([]any, m.Size())
 	count := 0
 	it := m.Iterator()
 	for it.Next() {
@@ -92,7 +92,7 @@ func (m *Map) Values() []interface{} {
 
 // Clear removes all elements from the map.
 func (m *Map) Clear() {
-	m.table = make(map[interface{}]interface{})
+	m.table = make(map[any]any)
 	m.ordering.Clear()
 }
 

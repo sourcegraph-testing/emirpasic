@@ -48,7 +48,7 @@ func TestQueuePeek(t *testing.T) {
 }
 
 func TestQueueDequeue(t *testing.T) {
-	assert := func(actualValue interface{}, expectedValue interface{}) {
+	assert := func(actualValue any, expectedValue any) {
 		if actualValue != expectedValue {
 			t.Errorf("Got %v expected %v", actualValue, expectedValue)
 		}
@@ -100,7 +100,7 @@ func TestQueueDequeue(t *testing.T) {
 }
 
 func TestQueueDequeueFull(t *testing.T) {
-	assert := func(actualValue interface{}, expectedValue interface{}) {
+	assert := func(actualValue any, expectedValue any) {
 		if actualValue != expectedValue {
 			t.Errorf("Got %v expected %v", actualValue, expectedValue)
 		}
@@ -319,7 +319,7 @@ func TestQueueIteratorLast(t *testing.T) {
 
 func TestQueueIteratorNextTo(t *testing.T) {
 	// Sample seek function, i.e. string starting with "b"
-	seek := func(index int, value interface{}) bool {
+	seek := func(index int, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 
@@ -371,7 +371,7 @@ func TestQueueIteratorNextTo(t *testing.T) {
 
 func TestQueueIteratorPrevTo(t *testing.T) {
 	// Sample seek function, i.e. string starting with "b"
-	seek := func(index int, value interface{}) bool {
+	seek := func(index int, value any) bool {
 		return strings.HasSuffix(value.(string), "b")
 	}
 
@@ -424,7 +424,7 @@ func TestQueueIteratorPrevTo(t *testing.T) {
 }
 
 func TestQueueIterator(t *testing.T) {
-	assert := func(actualValue interface{}, expectedValue interface{}) {
+	assert := func(actualValue any, expectedValue any) {
 		if actualValue != expectedValue {
 			t.Errorf("Got %v expected %v", actualValue, expectedValue)
 		}
@@ -508,7 +508,7 @@ func TestQueueSerialization(t *testing.T) {
 	err = queue.FromJSON(bytes)
 	assert()
 
-	bytes, err = json.Marshal([]interface{}{"a", "b", "c", queue})
+	bytes, err = json.Marshal([]any{"a", "b", "c", queue})
 	if err != nil {
 		t.Errorf("Got error %v", err)
 	}

@@ -15,7 +15,7 @@ var _ containers.ReverseIteratorWithKey = (*Iterator)(nil)
 // Iterator holding the iterator's state
 type Iterator struct {
 	iterator doublylinkedlist.Iterator
-	table    map[interface{}]interface{}
+	table    map[any]any
 }
 
 // Iterator returns a stateful iterator whose elements are key/value pairs.
@@ -42,14 +42,14 @@ func (iterator *Iterator) Prev() bool {
 
 // Value returns the current element's value.
 // Does not modify the state of the iterator.
-func (iterator *Iterator) Value() interface{} {
+func (iterator *Iterator) Value() any {
 	key := iterator.iterator.Value()
 	return iterator.table[key]
 }
 
 // Key returns the current element's key.
 // Does not modify the state of the iterator.
-func (iterator *Iterator) Key() interface{} {
+func (iterator *Iterator) Key() any {
 	return iterator.iterator.Value()
 }
 
@@ -83,7 +83,7 @@ func (iterator *Iterator) Last() bool {
 // passed function, and returns true if there was a next element in the container.
 // If NextTo() returns true, then next element's key and value can be retrieved by Key() and Value().
 // Modifies the state of the iterator.
-func (iterator *Iterator) NextTo(f func(key interface{}, value interface{}) bool) bool {
+func (iterator *Iterator) NextTo(f func(key any, value any) bool) bool {
 	for iterator.Next() {
 		key, value := iterator.Key(), iterator.Value()
 		if f(key, value) {
@@ -97,7 +97,7 @@ func (iterator *Iterator) NextTo(f func(key interface{}, value interface{}) bool
 // passed function, and returns true if there was a next element in the container.
 // If PrevTo() returns true, then next element's key and value can be retrieved by Key() and Value().
 // Modifies the state of the iterator.
-func (iterator *Iterator) PrevTo(f func(key interface{}, value interface{}) bool) bool {
+func (iterator *Iterator) PrevTo(f func(key any, value any) bool) bool {
 	for iterator.Prev() {
 		key, value := iterator.Key(), iterator.Value()
 		if f(key, value) {

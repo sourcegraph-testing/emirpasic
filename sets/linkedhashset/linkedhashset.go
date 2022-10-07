@@ -25,16 +25,16 @@ var _ sets.Set = (*Set)(nil)
 
 // Set holds elements in go's native map
 type Set struct {
-	table    map[interface{}]struct{}
+	table    map[any]struct{}
 	ordering *doublylinkedlist.List
 }
 
 var itemExists = struct{}{}
 
 // New instantiates a new empty set and adds the passed values, if any, to the set
-func New(values ...interface{}) *Set {
+func New(values ...any) *Set {
 	set := &Set{
-		table:    make(map[interface{}]struct{}),
+		table:    make(map[any]struct{}),
 		ordering: doublylinkedlist.New(),
 	}
 	if len(values) > 0 {
@@ -45,7 +45,7 @@ func New(values ...interface{}) *Set {
 
 // Add adds the items (one or more) to the set.
 // Note that insertion-order is not affected if an element is re-inserted into the set.
-func (set *Set) Add(items ...interface{}) {
+func (set *Set) Add(items ...any) {
 	for _, item := range items {
 		if _, contains := set.table[item]; !contains {
 			set.table[item] = itemExists
@@ -56,7 +56,7 @@ func (set *Set) Add(items ...interface{}) {
 
 // Remove removes the items (one or more) from the set.
 // Slow operation, worst-case O(n^2).
-func (set *Set) Remove(items ...interface{}) {
+func (set *Set) Remove(items ...any) {
 	for _, item := range items {
 		if _, contains := set.table[item]; contains {
 			delete(set.table, item)
@@ -69,7 +69,7 @@ func (set *Set) Remove(items ...interface{}) {
 // Contains check if items (one or more) are present in the set.
 // All items have to be present in the set for the method to return true.
 // Returns true if no arguments are passed at all, i.e. set is always superset of empty set.
-func (set *Set) Contains(items ...interface{}) bool {
+func (set *Set) Contains(items ...any) bool {
 	for _, item := range items {
 		if _, contains := set.table[item]; !contains {
 			return false
@@ -90,13 +90,13 @@ func (set *Set) Size() int {
 
 // Clear clears all values in the set.
 func (set *Set) Clear() {
-	set.table = make(map[interface{}]struct{})
+	set.table = make(map[any]struct{})
 	set.ordering.Clear()
 }
 
 // Values returns all items in the set.
-func (set *Set) Values() []interface{} {
-	values := make([]interface{}, set.Size())
+func (set *Set) Values() []any {
+	values := make([]any, set.Size())
 	it := set.Iterator()
 	for it.Next() {
 		values[it.Index()] = it.Value()

@@ -33,7 +33,7 @@ func (iterator *Iterator) Next() bool {
 
 // Value returns the current element's value.
 // Does not modify the state of the iterator.
-func (iterator *Iterator) Value() interface{} {
+func (iterator *Iterator) Value() any {
 	value, _ := iterator.queue.list.Get(iterator.index)
 	return value
 }
@@ -62,7 +62,7 @@ func (iterator *Iterator) First() bool {
 // passed function, and returns true if there was a next element in the container.
 // If NextTo() returns true, then next element's index and value can be retrieved by Index() and Value().
 // Modifies the state of the iterator.
-func (iterator *Iterator) NextTo(f func(index int, value interface{}) bool) bool {
+func (iterator *Iterator) NextTo(f func(index int, value any) bool) bool {
 	for iterator.Next() {
 		index, value := iterator.Index(), iterator.Value()
 		if f(index, value) {

@@ -20,14 +20,14 @@ var _ sets.Set = (*Set)(nil)
 
 // Set holds elements in go's native map
 type Set struct {
-	items map[interface{}]struct{}
+	items map[any]struct{}
 }
 
 var itemExists = struct{}{}
 
 // New instantiates a new empty set and adds the passed values, if any, to the set
-func New(values ...interface{}) *Set {
-	set := &Set{items: make(map[interface{}]struct{})}
+func New(values ...any) *Set {
+	set := &Set{items: make(map[any]struct{})}
 	if len(values) > 0 {
 		set.Add(values...)
 	}
@@ -35,14 +35,14 @@ func New(values ...interface{}) *Set {
 }
 
 // Add adds the items (one or more) to the set.
-func (set *Set) Add(items ...interface{}) {
+func (set *Set) Add(items ...any) {
 	for _, item := range items {
 		set.items[item] = itemExists
 	}
 }
 
 // Remove removes the items (one or more) from the set.
-func (set *Set) Remove(items ...interface{}) {
+func (set *Set) Remove(items ...any) {
 	for _, item := range items {
 		delete(set.items, item)
 	}
@@ -51,7 +51,7 @@ func (set *Set) Remove(items ...interface{}) {
 // Contains check if items (one or more) are present in the set.
 // All items have to be present in the set for the method to return true.
 // Returns true if no arguments are passed at all, i.e. set is always superset of empty set.
-func (set *Set) Contains(items ...interface{}) bool {
+func (set *Set) Contains(items ...any) bool {
 	for _, item := range items {
 		if _, contains := set.items[item]; !contains {
 			return false
@@ -72,12 +72,12 @@ func (set *Set) Size() int {
 
 // Clear clears all values in the set.
 func (set *Set) Clear() {
-	set.items = make(map[interface{}]struct{})
+	set.items = make(map[any]struct{})
 }
 
 // Values returns all items in the set.
-func (set *Set) Values() []interface{} {
-	values := make([]interface{}, set.Size())
+func (set *Set) Values() []any {
+	values := make([]any, set.Size())
 	count := 0
 	for item := range set.items {
 		values[count] = item
