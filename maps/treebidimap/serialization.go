@@ -6,6 +6,7 @@ package treebidimap
 
 import (
 	"encoding/json"
+
 	"github.com/emirpasic/gods/containers"
 	"github.com/emirpasic/gods/utils"
 )

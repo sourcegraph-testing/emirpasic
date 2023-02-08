@@ -11,9 +11,10 @@ package arraystack
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/emirpasic/gods/lists/arraylist"
 	"github.com/emirpasic/gods/stacks"
-	"strings"
 )
 
 // Assert Stack implementation

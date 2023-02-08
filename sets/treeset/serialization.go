@@ -6,6 +6,7 @@ package treeset
 
 import (
 	"encoding/json"
+
 	"github.com/emirpasic/gods/containers"
 )
 

@@ -7,9 +7,10 @@ package arraylist
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/emirpasic/gods/utils"
 	"strings"
 	"testing"
+
+	"github.com/emirpasic/gods/utils"
 )
 
 func TestListNew(t *testing.T) {

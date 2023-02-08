@@ -17,6 +17,7 @@ package hashbidimap
 
 import (
 	"fmt"
+
 	"github.com/emirpasic/gods/maps"
 	"github.com/emirpasic/gods/maps/hashmap"
 )

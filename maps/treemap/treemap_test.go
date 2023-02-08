@@ -7,9 +7,10 @@ package treemap
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/emirpasic/gods/utils"
 	"strings"
 	"testing"
+
+	"github.com/emirpasic/gods/utils"
 )
 
 func TestMapPut(t *testing.T) {
