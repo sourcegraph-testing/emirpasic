@@ -19,10 +19,11 @@ package treebidimap
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/emirpasic/gods/maps"
 	"github.com/emirpasic/gods/trees/redblacktree"
 	"github.com/emirpasic/gods/utils"
-	"strings"
 )
 
 // Assert Map implementation

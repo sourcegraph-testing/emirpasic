@@ -2,6 +2,7 @@ package serialization
 
 import (
 	"fmt"
+
 	"github.com/emirpasic/gods/lists/arraylist"
 	"github.com/emirpasic/gods/maps/hashmap"
 )
